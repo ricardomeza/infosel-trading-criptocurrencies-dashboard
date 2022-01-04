@@ -1,7 +1,15 @@
-import { Button as ButtonRM } from '@ricardomeza/infosel-ui-component-library'
-import React from 'react'
-import { AppContextProvider } from '../state/appContext'
 import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import React, { useContext, useEffect } from 'react'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableRow from '@mui/material/TableRow'
+import { AppContext, AppContextProvider } from '../state/appContext'
+import { Button as ButtonRM } from '@ricardomeza/infosel-ui-component-library'
+import { endpointResponseWasSuccessful } from '../utils/api'
+import { useAssetsGet } from '../api/hooks/assets'
 
 const App = () => (
   <React.StrictMode>
@@ -17,8 +25,46 @@ const App = () => (
       <p>
         <Button variant="contained">Hello World</Button>
       </p>
+      <Assets />
     </AppContextProvider>
   </React.StrictMode>
 )
+
+const Assets = () => {
+  const { appApiState } = useContext(AppContext)
+  const { assetsGet } = useAssetsGet()
+
+  useEffect(() => {
+    assetsGet()
+  }, [])
+
+  return endpointResponseWasSuccessful(appApiState.assetsGet) ? (
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableBody>
+          {appApiState.assetsGet.data[0].data.map((row: any) => (
+            <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+              <TableCell component="th" scope="row">
+                {row.name}
+                <br />
+                {row.symbol}
+              </TableCell>
+              <TableCell align="right">
+                <p>Price</p>
+                <p>{row.priceUsd}</p>
+              </TableCell>
+              <TableCell align="right">
+                <p>(24H)</p>
+                <p>{row.changePercent24Hr}</p>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  ) : (
+    <></>
+  )
+}
 
 export default App

@@ -3,7 +3,11 @@ export interface IAppContextProvider {
 }
 
 export interface IContext {
-  // App State
+  // API
+  appApiState: any
+  dispatch: any
+
+  // App
   appState: {
     demoValue?: string
   }
