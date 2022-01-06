@@ -2,6 +2,11 @@ export interface IEmojis {
   [key: string]: string[]
 }
 
+export interface IEndpointsMiscParams {
+  assetId: string
+  interval: string
+}
+
 export interface IHttpConnections {
   [key: string]: any
 }

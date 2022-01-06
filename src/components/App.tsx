@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow'
 import { AppContext, AppContextProvider } from '../state/appContext'
 import { Button as ButtonRM } from '@ricardomeza/infosel-ui-component-library'
 import { endpointResponseWasSuccessful } from '../utils/api'
-import { useAssetsGet } from '../api/hooks/assets'
+import { useAssetsGet, useAssetsHistoryGet } from '../api/hooks/assets'
 
 const App = () => (
   <React.StrictMode>
@@ -32,10 +32,17 @@ const App = () => (
 
 const Assets = () => {
   const { appApiState } = useContext(AppContext)
-  const { assetsGet } = useAssetsGet()
+  const { assetsGet, assetsGetReset } = useAssetsGet()
+  const { assetsHistoryGet, assetsHistoryGetReset } = useAssetsHistoryGet()
 
   useEffect(() => {
     assetsGet()
+    assetsHistoryGet('bitcoin', 'm5')
+
+    return () => {
+      assetsGetReset()
+      assetsHistoryGetReset()
+    }
   }, [])
 
   return endpointResponseWasSuccessful(appApiState.assetsGet) ? (
