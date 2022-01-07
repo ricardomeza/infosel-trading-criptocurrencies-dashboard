@@ -1,0 +1,27 @@
+.main-toolbar {
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+
+  a {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-right: 50px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:nth-child(2) {
+      svg {
+        width: 20px;
+      }
+    }
+
+    svg {
+      margin-right: 3px;
+    }
+  }
+}

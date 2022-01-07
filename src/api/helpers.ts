@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { emojis, httpResponseCode, sequenceSteps, STEP_FAILED_INDEX } from './constants'
+import { emojis, sequenceSteps, STEP_FAILED_INDEX } from './constants'
 import { findKey } from 'lodash'
 import { getRandomInt } from '../utils/misc'
 import { IReducerAction, IReducersAPICombined } from './interface'
@@ -34,9 +34,7 @@ export const getApiCallSequenceSteps = (actionName: string) =>
   }, {})
 
 export const getPayloadData = (payload: any) => {
-  const WAS_SUCCESSFUL: boolean = Boolean(
-    payload.status >= httpResponseCode[200].min && payload.status < httpResponseCode[200].max
-  )
+  const WAS_SUCCESSFUL: boolean = Boolean(payload.status >= 200 && payload.status < 299)
   return [
     payload.data,
     {

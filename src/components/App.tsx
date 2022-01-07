@@ -1,11 +1,14 @@
+import AppRoutes from './AppRoutes/AppRoutes'
 import React from 'react'
-import TableAssets from './TableAssets/TableAssets'
 import { AppContextProvider } from '../state/appContext'
+import { BrowserRouter } from 'react-router-dom'
 
 const App = () => (
   <React.StrictMode>
     <AppContextProvider>
-      <TableAssets />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </AppContextProvider>
   </React.StrictMode>
 )

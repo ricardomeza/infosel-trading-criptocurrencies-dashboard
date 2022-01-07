@@ -1,10 +1,11 @@
 {
   "name": "infosel-trading-criptocurrencies-dashboard",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
     "@mui/material": "^5.2.7",
     "@ricardomeza/infosel-ui-component-library": "^1.2.6",
     "@testing-library/jest-dom": "^5.16.1",

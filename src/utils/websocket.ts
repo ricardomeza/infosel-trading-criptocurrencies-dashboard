@@ -1,3 +1,3 @@
 export const websocketConnections = {
-  coincap: 'wss://ws.coincap.io/prices?assets=ALL'
+  coincap: (assetsFilter: string = 'ALL') => `wss://ws.coincap.io/prices?assets=${assetsFilter}`
 }

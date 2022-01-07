@@ -3,22 +3,21 @@ import { AppContext } from '../../state/appContext'
 import { assetsHistoryGet } from '../../api/endpoints/assets'
 import { cryptoCoinsLogos } from '../../utils/misc'
 import { endpointResponseWasSuccessful } from '../../utils/api'
-import { IAssetData } from './interface'
+import { IAssetData } from '../TableAssets/interface'
 import { ISTable } from '@ricardomeza/infosel-ui-component-library'
-import { TABLE_HEADERS } from './constants'
+import { TABLE_HEADERS } from '../TableAssets/constants'
 import { useAssetsGet } from '../../api/hooks/assets'
 import { useContext, useEffect } from 'react'
 import { useCryptoCoinsData } from '../../hooks/cryptoCoinData'
-import './TableAssets.scss'
 
-const TableAssets = () => {
+const TableAssetsFavs = () => {
   const { assetsGet, assetsGetReset } = useAssetsGet()
   const {
-    appState,
     appApiState,
+    appState,
     changeOrAddValueToAppState,
-    cryptoPrices,
     closeWebsocketConnection,
+    cryptoPrices,
     initializeWebsocketConnection
   } = useContext(AppContext)
   const [newTable, setTableData] = useCryptoCoinsData(cryptoPrices)
@@ -30,8 +29,10 @@ const TableAssets = () => {
 
   useEffect(() => {
     if (endpointResponseWasSuccessful(appApiState.assetsGet)) {
-      initializeWebsocketConnection()
-      const DATA: IAssetData[] = appApiState.assetsGet.data[0].data
+      initializeWebsocketConnection(appState.assetsFavs)
+      const DATA: IAssetData[] = appApiState.assetsGet.data[0].data.filter((item: any) =>
+        appState.assetsFavs?.includes(item.id)
+      )
       changeOrAddValueToAppState({ cryptoCoinsLogos: cryptoCoinsLogos(DATA) })
       setTableData(DATA)
     }
@@ -49,4 +50,4 @@ const TableAssets = () => {
   )
 }
 
-export default TableAssets
+export default TableAssetsFavs

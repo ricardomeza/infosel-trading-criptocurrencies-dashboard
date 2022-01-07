@@ -13,10 +13,6 @@ export const emojis: IEmojis = {
   fruits: ['🍅', '🍇', '🍈', '🍉', '🍊', '🍋', '🍌', '🍍', '🍎', '🍏', '🍐', '🍑', '🍒', '🍓', '🥝', '🥥', '🥭']
 }
 
-export const httpResponseCode = {
-  ['200']: { max: 299, min: 200 }
-}
-
 export const reducersInitialState: IReducersInitialState = { data: [], error: {}, isLoading: false }
 
 export const sequenceSteps = ['RESET', 'FAILED', 'SUCCESSFUL', 'REQUESTED']

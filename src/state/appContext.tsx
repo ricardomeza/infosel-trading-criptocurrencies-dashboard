@@ -27,14 +27,14 @@ const AppContextProvider = ({ children }: IAppContextProvider) => {
   // WEBSOCKETS
   let websocketConnection: null | WebSocket
   const [cryptoPrices, setCryptoPrices] = useState([])
-  useEffect(() => {
+  const initializeWebsocketConnection = (assetsFilter?: string) => {
     if (!websocketConnection) {
-      websocketConnection = new WebSocket(websocketConnections.coincap)
+      websocketConnection = new WebSocket(websocketConnections.coincap(assetsFilter))
       websocketConnection.onmessage = (event) => setCryptoPrices(JSON.parse(event.data))
     }
-    return () => websocketConnection?.close()
-  }, [])
-  const CRYPTO = { cryptoPrices }
+  }
+  const closeWebsocketConnection = () => websocketConnection?.close()
+  const CRYPTO = { cryptoPrices, closeWebsocketConnection, initializeWebsocketConnection }
 
   // ...................................................................................................................
   return (
