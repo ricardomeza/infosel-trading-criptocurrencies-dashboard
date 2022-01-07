@@ -3,12 +3,17 @@ export interface IAppContextProvider {
 }
 
 export interface IContext {
-  // API
+  // API ...............................................................................................................
   appApiState: any
   dispatch: any
 
-  // App
+  // APP ...............................................................................................................
   appState: {
-    demoValue?: string
+    appMainTitle?: string
+    cryptoCoinsLogos?: Record<string, string>
   }
+  changeOrAddValueToAppState: (value: any) => void
+
+  // CRYPTO ............................................................................................................
+  cryptoPrices: any
 }

@@ -1,1 +1,7 @@
 @import-normalize; /* bring in normalize.css styles */
+
+body {
+  background: repeating-linear-gradient(326deg, #f1edf3, #f4f0f5 10px, #eef1f3 10px, #eaedef 20px);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 10px 100px;
+}

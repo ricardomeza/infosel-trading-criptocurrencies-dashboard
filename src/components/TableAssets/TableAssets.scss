@@ -1,0 +1,33 @@
+@import '../../assets/styles/variables';
+
+header {
+  background-image: linear-gradient(to right, rgba($color-pink-000, 1), rgba($color-blue-000, 1));
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  justify-content: space-between;
+  min-height: 80px;
+  padding: 0 20px;
+  z-index: 10;
+
+  .header__content {
+    align-items: center;
+    display: flex;
+
+    .content__title {
+      color: white;
+      font-size: 1.4em;
+    }
+  }
+
+  img {
+    width: 120px;
+  }
+}
+
+.assets__loading {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  min-height: 90vh;
+}
